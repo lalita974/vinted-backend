@@ -176,7 +176,7 @@ router.delete(
   }
 );
 
-router.get("/offers", isAuthenticated, async (req, res) => {
+router.get("/offers", async (req, res) => {
   try {
     let { title, priceMin, priceMax, sort, page } = req.query;
     let filters = {};
@@ -208,8 +208,8 @@ router.get("/offers", isAuthenticated, async (req, res) => {
 
     const offers = await Offer.find(filters)
       .populate("owner", "account")
-      .select("product_name product_price")
-      .limit(5)
+      // .select("product_name product_price")
+      // .limit(5)
       .skip(offerToSkip)
       .sort({ product_price: sort });
 
